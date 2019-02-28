@@ -25,7 +25,40 @@ class Instructor extends Person{
     grade(student, subject){
         return `${student.name} receives a perfect score on ${subject}`
     }
+
+    calculate(student){
+
+        let subtract = Math.random()<.5
+        let num = Math.round(Math.random()*20)
+        num//?
+        Math.random()*10
+        return `${student.name}'s grade is ${student.grade }`
+    }
 }
+
+// var randomBoolean = [
+//     function(){
+                 
+//         Math.random() //? 
+//         return Math.random()<.5;//? // Readable, succint
+//     },                    
+    
+//     function(){
+   
+//         !(Math.random()/*?*/+.5/*?*/|0)/*?*///?
+//         return !(Math.random()+.5|0); // (shortcut for Math.round)
+//     },
+    
+//     function(){
+//         return !(+new Date()%2); // faux-randomness
+//     }
+// ];
+
+// for(var i = 0, l = randomBoolean.length; i < l; i++){
+//     console.log('picking using', i, ' -', randomBoolean[i]() );
+// }
+
+
 
 let josh = new Instructor(
     {
@@ -38,10 +71,7 @@ let josh = new Instructor(
         catchPhrase: 'You know it!'
     }
 )
-
-console.log(josh.demo('Javascritp III'))
-
-
+// console.log(josh.demo('Javascritp III'))
 
 class Student extends Person{
     constructor(data){
@@ -49,11 +79,12 @@ class Student extends Person{
        this.previousBackground = data.previousBackground
        this.className = data.className
        this.favSubjects = data.favSubjects
+       this.grade = data.grade
     }
     listsSubjects(){
-        this.favSubjects.forEach(element => {
-            return console.log(element)
-        });
+        for(let subject of this.favSubjects){
+            return subject
+        }
     }
     PRAssignment(subject){
         return `${this.name} has submitted a PR for ${subject}`
@@ -74,15 +105,15 @@ let ellen = new Student(
         catchPhrase: 'Let\' code!',
         previousBackground: 'Flash/Acitionscript',
         className: 'Web18',
-        favSubjects: ['Javascript, Database, CSS']
-
+        favSubjects: ['Javascript, Database, CSS'],
+        grade: 0
     }
 )
-
-console.log(josh.grade(ellen, 'Javascritp III'))
-console.log(ellen.listsSubjects())
-console.log(ellen.PRAssignment('Javascript III'))
-console.log(ellen.sprintChallenge('Javascript III'))
+console.log(josh.calculate(ellen))
+// console.log(josh.grade(ellen, 'Javascritp III'))
+// console.log(ellen.listsSubjects())
+// console.log(ellen.PRAssignment('Javascript III'))
+// console.log(ellen.sprintChallenge('Javascript III'))
 
 
 class ProjectManager extends Instructor{
@@ -117,5 +148,12 @@ let ben = new ProjectManager(
 )
 
 
-console.log(ben.standUp('web18_ben'))
-console.log(ben.debugsCode(ellen, 'Javascritp III'))
+// console.log(ben.standUp('web18_ben'))
+// console.log(ben.debugsCode(ellen, 'Javascritp III'))
+
+Object.defineProperty(ellen, 'grade', 
+{
+    value: 0,
+    writable: true
+})
+console.log(ellen.grade)
